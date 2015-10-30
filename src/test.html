@@ -1,0 +1,38 @@
+// read the json file using XMLHttpRequest
+
+function InvertedIndex() {
+	// Main object
+	this.ReadFile = function() {
+		return $.getJSON(pathfile);
+	}
+}
+
+function ReadFile(filepath, callback) {
+
+	var xmlhttp = new XMLHttpRequest();
+	//xmlhttp.overrideMimeType("application/json");
+	xmlhttp.open('GET', filepath, true);
+	var data;
+	xmlhttp.onreadystatechange = function() {
+
+		if(xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+			callback(xmlhttp.responseText);
+		}
+
+	};
+
+	xmlhttp.send(null);
+
+}
+
+InvertedIndex.prototype.readData = function(path) {
+	var data;
+	ReadFile(path, function(response) {
+
+		var data = JSON.parse(response);
+		
+		console.log(data[0]);
+	});
+	return data;
+	
+}
