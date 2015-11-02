@@ -93,4 +93,4 @@ Index.prototype = {
   
     return results;
   }
-}
+};
