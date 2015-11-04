@@ -1,14 +1,13 @@
-"use strict";
-var Index;
+var Index; // jshint ignore:line
 (function() {
-
+  'use strict';
   Index = function() {
     // Main indexed object
     this.obj = {
       0: [],
       1: []
     };
-    
+
     this.createIndex = function(filepath) {
       // reads json file and returns the content
       return $.getJSON(filepath); // jshint ignore:line
