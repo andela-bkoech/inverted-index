@@ -8,6 +8,9 @@ describe("Test suit for inverted index checkpoint", function() {
       done();
     });
 
+    // spy on a function
+    spyOn(index, "populateIndex").and.callThrough();
+
   });
 
   describe("Read book data", function() {
@@ -45,18 +48,30 @@ describe("Test suit for inverted index checkpoint", function() {
     describe("checks whether the index is created", function() {
 
       it("return true if data is object", function() {
+        // function is yet to be called
+        expect(index.populateIndex).not.toHaveBeenCalled();
         expect(typeof index.getIndex(index.results)).toBe('object');
         expect(index.getIndex(index.results)[0]).toBeDefined();
+        // function has been called
+        expect(index.populateIndex).toHaveBeenCalled();
       });
 
       it("passes if index isn't an array and length 2", function() {
+        // function is yet to be called
+        expect(index.populateIndex).not.toHaveBeenCalled();
         expect(Array.isArray(index.getIndex(index.results))).toBe(false);
         expect(Object.keys(index.getIndex(index.results))).toEqual(['0', '1']);
+        // function has been called
+        expect(index.populateIndex).toHaveBeenCalled();
       });
 
       it("ensure that the index is correct", function() {
+        // function is yet to be called
+        expect(index.populateIndex).not.toHaveBeenCalled();
         expect(index.getIndex(index.results)[0][0]).toEqual('alice');
         expect(index.getIndex(index.results)[1][0]).toEqual('the');
+        // function has been called
+        expect(index.populateIndex).toHaveBeenCalled();
       });
     });
   });
@@ -65,7 +80,6 @@ describe("Test suit for inverted index checkpoint", function() {
 
     describe("index returns the correct results", function() {
       it("returns an array", function() {
-        expect(Array.isArray(index.searchIndex("Alice"))).toBe(true);
         expect(Array.isArray(index.searchIndex("Alice"))).toBe(true);
       });
 
